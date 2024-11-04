@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Click Counter</title>
+    <style>
+        #clickableImage {
+            width: 500px; /* Задайте нужный размер изображения */
+        }
+        #clickableImage:hover {
+            cursor: pointer; /* Изменение курсора при наведении */
+        }
+    </style>
+</head>
+<body>
+    <img src="https://3.downloader.disk.yandex.ru/preview/b89248f1cf0ce169c1c7ba22795b2092573f3695992c37ccc611064ddc9c3e40/inf/TV7b326SnCnJdIwhIvc_I8qbaZ5oIXlMbNvSMSdDybrL-WU0QVMvOa-jenUrdsWH4gAVXqeR8Wjfxjie-9cIuA%3D%3D?uid=1892507523&filename=upload_2023_09_15_15_11_40_963.jpg&disposition=inline&hash=&limit=0&content_type=image%2Fjpeg&owner_uid=1892507523&tknv=v2&size=1147x592" alt="Clickable Image" id="clickableImage">
+    <p>Количество Подщёчин в этой сессии: <span id="sessionClickCount">0</span></p>
+    <p>Общее количество Подщёчин: <span id="totalClickCount">0</span></p>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            let sessionClickCount = 0;
+            const clickableImage = document.getElementById("clickableImage");
+            const sessionClickCountDisplay = document.getElementById("sessionClickCount");
+            const totalClickCountDisplay = document.getElementById("totalClickCount");
+
+            // Получаем общее количество нажатий из localStorage
+            let totalClickCount = localStorage.getItem('totalClickCount') || 0;
+            totalClickCount = parseInt(totalClickCount, 10);
+
+            // Обновляем дисплей общего количества нажатий
+            totalClickCountDisplay.textContent = totalClickCount;
+
+            clickableImage.addEventListener("click", function() {
+                // Увеличиваем счетчики
+                sessionClickCount++;
+                totalClickCount++;
+
+                // Обновляем отображение на странице
+                sessionClickCountDisplay.textContent = sessionClickCount;
+                totalClickCountDisplay.textContent = totalClickCount;
+
+                // Сохраняем общее количество нажатий в localStorage
+                localStorage.setItem('totalClickCount', totalClickCount);
+            });
+        });
+    </script>
+</body>
+</html>
